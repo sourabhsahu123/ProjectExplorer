@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+<h1>{{ project.title }}</h1>
+
+<div class ="row">
+<div class="col-md-8">
+<img src="{% static project.image %}" alt ="" width="100%">
+</div>
+
+<div class="col-md-4">
+<h5>About the project</h5>
+<p> {{ project.description }}</p>
+<br>
+<h5>Technolog Used:</h5>
+<p>{{ project.technology }}</p>
+<h5>Price:</h5>
+<p>{{ project.price }}$</p>
+
+
+</div>
+
+</div>
+
+<div>{{ post.title }}</div>
+<!--Comments-->
+<div>
+<h3>{{ posts.count }} comments</h3>
+{% for post in posts %}
+<div class="card card-comments mb-3 wow fadeIn">
+    <div class="card-header font-weight-bold"></div>
+    <div class="card-body">
+
+        <div class="media d-block d-md-flex mt-4"> <!--block for profilephoto-->
+            <img class=" img-fluid rounded img-thumbnail" style="width:10%;" src="{{ post.image.url }}" alt="Generic placeholder image">
+            <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                <h5 class="mt-0 font-weight-bold">{{ post.title }}
+                    <a href="" class="pull-right">
+                        <i class="fa fa-reply"></i>
+                    </a>
+                </h5>
+               {{ post.body }}
+
+               
+
+                <!-- Quick Reply 
+                <div class="form-group mt-4">
+                    <label for="quickReplyFormComment">Your comment</label>
+                    <textarea class="form-control" id="quickReplyFormComment" rows="5"></textarea>
+
+                    <div class="text-center">
+                        <button class="btn btn-info btn-sm" type="submit">Post</button>
+                    </div>
+                </div>-->
+
+
+               
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+
+{% endfor %}
+<!--/.Comments-->
+
+<!--Reply-->
+<div class="card mb-3 wow fadeIn">
+    <div class="card-header font-weight-bold">Leave a reply</div>
+    <div class="card-body">
+
+        <!-- Default form reply -->
+        <form method="POST" enctype="multipart/form-data"> <!--can add multiple file in same form-->
+        {% csrf_token %%}
+
+            <!-- Comment -->
+            <div class="form-group">
+                <label for="replyFormComment">Your comment</label>
+                <textarea class="form-control" name="comment" rows="5"></textarea>
+            </div>
+
+            <!-- Name -->
+            <label for="replyFormName">Your name</label>
+            <input type="text" name="title" class="form-control">
+
+            <br>
+
+            <!-- Email -->
+            <label for="replyFormEmail">{{ project.title }}</label>
+            <input type="text" name="project" class="form-control">
+
+
+ <label for="profileimg">Your Photo</label>
+            <input type="file" name="profilephoto" class="form-control"> <!--uploading image here--> 
+
+
+            <div class="text-center mt-4">
+                <button class="btn btn-info btn-md" type="submit">Post</button>
+            </div>
+        </form>
+        <!-- Default form reply -->
+
+
+
+    </div>
+</div>
+<!--/.Reply-->
+</div>
+{% endblock %}

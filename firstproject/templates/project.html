@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %} <!--load js, css-->
+
+{% block content %}
+<div class = "row" style="margin:20px;">
+{% for project in projects %}
+<div class="col-md-4"> <!--4 columns-->
+<div class="card mb-2"> <!--takes 2 margins, apart by-->
+<img class="card-img-top" src ="{% static project.image %}"> <!--image goes onto top -->
+<div class="card-body">
+<h5 clas="card-title"> <!--first, 2nd and 3rd project-->
+{{ project.title }}</h5> <!--add it in admin-->
+<p class="card-text">{{ project.description }}</p> <!--shows description-->
+<div>
+<h5 clas="btn btn-success"> <!--first, 2nd and 3rd project-->
+{{ project.technology }}</h5>
+<h4>{{ project.price }}</h4>
+<a href ="{% url 'project_detail' project.pk %}" class="btn btn-primary">ReadMore..</a> <!--this is the router-->
+</div>
+</div>
+</div>
+</div>
+
+{% endfor %}
+</div>
+{% endblock %}
